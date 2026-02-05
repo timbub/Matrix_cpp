@@ -1,0 +1,11 @@
+build/
+Makefile
+*.mk
+*.obuild/
+Makefile
+*.mk
+*.o
+*.
+*.out
+Testing/
+.DS_Store
