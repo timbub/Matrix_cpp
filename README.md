@@ -9,6 +9,7 @@ matrix
 ├── Matrix.hpp
 ├── BufMatrix.hpp
 ├── tests
+|   ├── run_tests.sh
 |   ├── input
 |   |  ├── test_1.in
 |   |  ├── test_2.in
