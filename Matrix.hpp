@@ -28,12 +28,6 @@ namespace matrix {
                 data_[i] = other.data_[i];
             }
         }
-        template <typename OtherT>
-        Matrix(const Matrix<OtherT>& other) : data_(other.rows_ * other.cols_), cols_(other.cols_), rows_(other.rows_) {
-            for (size_t i = 0; i < rows_*cols_; i++) {
-                data_[i] = static_cast<ElemT>(other.data_[i]);
-            }
-        }
         Matrix(Matrix&& other) noexcept : rows_{std::exchange(other.rows_, 0)},
                                           cols_{std::exchange(other.cols_, 0)},
                                           data_{std::move(other.data_)} {}

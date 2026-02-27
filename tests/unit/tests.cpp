@@ -2,27 +2,27 @@
 #include "../../Matrix.hpp"
 #include "gtest/gtest.h"
 
-//namespace {
-//    struct ThrowingElement {
-//        double value_;
-//        static inline int current_copies_ = 0;
-//        static inline int throw_after = -1;
-//
-//        static void reset() {
-//            current_copies_ = 0;
-//            throw_after = -1;
-//        }
-//
-//        explicit ThrowingElement(int value) : value_(value) {}
-//
-//        ThrowingElement(const ThrowingElement& other) : value_(other.value_) {
-//            if (throw_after != -1 && ++current_copies_ >= throw_after) throw std::bad_alloc();
-//        }
-//
-//        auto operator <=>(const ThrowingElement& other) const = default;
-//
-//    };
-//};
+namespace {
+    struct ThrowingElement {
+        double value_;
+        static inline int current_copies_ = 0;
+        static inline int throw_after = -1;
+
+        static void reset() {
+            current_copies_ = 0;
+            throw_after = -1;
+        }
+
+        explicit ThrowingElement(double value) : value_(value) {}
+
+        ThrowingElement(const ThrowingElement& other) : value_(other.value_) {
+            if (throw_after != -1 && ++current_copies_ >= throw_after) throw std::bad_alloc();
+        }
+
+        auto operator <=>(const ThrowingElement& other) const = default;
+
+    };
+};
 
 TEST (BUFFER, move_ctor) {
     matrix::BufMatrix<int> buf1(3);
@@ -86,27 +86,5 @@ TEST (MATRIX, move_assigment) {
     EXPECT_EQ(expected, matrix2.determinate());
 }
 
-//TEST (EXCEPTION, copy_ctor) {
-//    ThrowingElement::reset();
-//
-//    matrix::Matrix<ThrowingElement> matrix{3,3};
-//    for (int i = 0; i < 3; i++) {
-//        for (int j = 0; j < 3; j++) {
-//            matrix[i][j] = ThrowingElement(i);
-//        }
-//    }
-//
-//    size_t answer_before = matrix.determinate();
-//
-//    ThrowingElement::reset();
-//    ThrowingElement::throw_after = 3;
-//
-//    EXPECT_THROW(matrix::Matrix<ThrowingElement> matrix2(matrix), std::bad_alloc);
-//
-//    ThrowingElement::reset();
-//    size_t answer_after = matrix.determinate();
-//
-//    EXPECT_EQ(answer_after, answer_before);
-//}
 
 
