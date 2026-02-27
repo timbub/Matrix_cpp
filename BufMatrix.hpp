@@ -1,14 +1,15 @@
 #pragma once
 #include <utility>
+#include <cstddef>
 
 namespace matrix {
 
-    template <typename ElemT> 
+    template <typename ElemT>
     class BufMatrix {
     private:
         ElemT* buf_ = nullptr;
         size_t len_ = 0;
-    public: 
+    public:
         BufMatrix() = default;
 
         explicit BufMatrix(size_t len) : len_(len) {
@@ -21,7 +22,8 @@ namespace matrix {
 
         BufMatrix& operator=(BufMatrix&& other) {
             if (this == &other) return *this;
-                swap(other);
+            swap(other);
+            return *this;
         }
 
         ~BufMatrix() {

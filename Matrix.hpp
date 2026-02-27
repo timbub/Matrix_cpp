@@ -1,4 +1,4 @@
-#pragma once 
+#pragma once
 #include "BufMatrix.hpp"
 #include <math.h>
 #include <algorithm>
@@ -12,31 +12,40 @@ namespace compare_double {
 };
 
 namespace matrix {
-    template <typename ElemT> 
+    template <typename ElemT>
     class Matrix {
     private:
         size_t rows_;
         size_t cols_;
         BufMatrix<ElemT> data_;
     public:
+        const size_t get_rows() {return rows_;}
+        const size_t get_cols() {return cols_;}
+
         Matrix(size_t rows, size_t cols) : data_(rows * cols), cols_(cols), rows_(rows) {}
-        Matrix(const Matrix& other) : data_(other.rows_ * other.cols_), cols_(other.cols_), rows_(other.rows_) { //copy constructor
+        Matrix(const Matrix& other) : data_(other.rows_ * other.cols_), cols_(other.cols_), rows_(other.rows_) {
             for (size_t i = 0; i < rows_*cols_; i++) {
                 data_[i] = other.data_[i];
             }
         }
-        Matrix(Matrix&& other) noexcept : rows_{std::exchange(other.rows_, 0)}, //move constructor
+        template <typename OtherT>
+        Matrix(const Matrix<OtherT>& other) : data_(other.rows_ * other.cols_), cols_(other.cols_), rows_(other.rows_) {
+            for (size_t i = 0; i < rows_*cols_; i++) {
+                data_[i] = static_cast<ElemT>(other.data_[i]);
+            }
+        }
+        Matrix(Matrix&& other) noexcept : rows_{std::exchange(other.rows_, 0)},
                                           cols_{std::exchange(other.cols_, 0)},
                                           data_{std::move(other.data_)} {}
 
-        Matrix& operator=(Matrix&& other) { //move assigment
+        Matrix& operator=(Matrix&& other) noexcept {
             if (this == &other) return *this;
             swap(other);
             return *this;
         }
 
-        Matrix& operator=(const Matrix& other) { //copy assigment
-            Matrix tmp(other); 
+        Matrix& operator=(const Matrix& other) {
+            Matrix tmp(other);
             swap(tmp);
             return *this;
         }
@@ -61,7 +70,7 @@ namespace matrix {
                     tmp[j].swap_rows(tmp[p_index]);
                     det *= -1.0;
                 }
-                if (compare_double::is_zero(pivot)) return 0; 
+                if (compare_double::is_zero(pivot)) return 0;
                 for (int i = j + 1; i < cols_; i++) {
                     double factor = tmp[i][j] / tmp[j][j];
                     tmp[i].sub_factor(tmp[j], factor, j + 1);
@@ -83,15 +92,15 @@ namespace matrix {
             size_t len_;
         public:
             explicit Row(ElemT* row, size_t len) : row_{row}, len_(len) {}
-            ElemT& operator[](size_t index) { return row_[index];} 
-            const ElemT& operator[](size_t index) const { return row_[index];} 
+            ElemT& operator[](size_t index) { return row_[index];}
+            const ElemT& operator[](size_t index) const { return row_[index];}
 
             void swap_rows(Row other) {
                 std::swap_ranges(row_, row_ + len_, other.row_);
             }
             void sub_factor(const Row& other, double factor, size_t first_position) {
                 for(int i = first_position; i < len_; i++) {
-                    row_[i] -= other.row_[i] * factor; 
+                    row_[i] -= other.row_[i] * factor;
                 }
             }
 
