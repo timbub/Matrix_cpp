@@ -19,8 +19,8 @@ namespace matrix {
         size_t cols_;
         BufMatrix<ElemT> data_;
     public:
-        const size_t get_rows() {return rows_;}
-        const size_t get_cols() {return cols_;}
+        size_t get_rows() const {return rows_;}
+        size_t get_cols() const {return cols_;}
 
         Matrix(size_t rows, size_t cols) : data_(rows * cols), cols_(cols), rows_(rows) {}
         Matrix(const Matrix& other) : data_(other.rows_ * other.cols_), cols_(other.cols_), rows_(other.rows_) {

@@ -12,8 +12,7 @@ namespace matrix {
     public:
         BufMatrix() = default;
 
-        explicit BufMatrix(size_t len) : len_(len) {
-            buf_ = new ElemT[len];
+        explicit BufMatrix(size_t len) : len_(len), buf_(new ElemT[len]) {
         }
         BufMatrix(BufMatrix&& other) noexcept : len_{std::exchange(other.len_, 0)}, buf_{std::exchange(other.buf_, nullptr)} {}
         BufMatrix(const BufMatrix& other) = delete;
