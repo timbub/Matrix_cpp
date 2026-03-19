@@ -1,9 +1,8 @@
 cmake_minimum_required(VERSION 3.20)
 
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-project(matrix)
+project(MATRIX)
 
 add_compile_options(
     $<$<CONFIG:Debug>:-fsanitize=address>
@@ -20,12 +19,11 @@ add_link_options(
 find_package(GTest REQUIRED)
 
 add_library(matrix_lib INTERFACE)
-target_include_directories(matrix_lib INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
-target_sources(matrix_lib INTERFACE Matrix.hpp BufMatrix.hpp)
-
-add_executable(matrix main.cpp)
-
-target_link_libraries(matrix PRIVATE matrix_lib)
+target_include_directories(matrix_lib INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/matrix)
 
 enable_testing()
-add_subdirectory(tests/unit)
+add_subdirectory(determinate)
+add_subdirectory(chain)
+
+
+

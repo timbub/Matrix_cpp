@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 3.20)
+
+project(MATRIX)
+
+add_executable(chain)
+target_sources(chain PRIVATE main.cpp Matrix_chain.hpp)
+target_link_libraries(chain PRIVATE matrix_lib)
+
+
+
+

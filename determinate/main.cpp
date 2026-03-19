@@ -11,8 +11,6 @@ int main() {
 
         if (size == 0) throw std::out_of_range("Size must be > 0\n");
 
-        //std::cout << "size: " << size << "\n";
-
         using ElemT = double;
         matrix::Matrix<ElemT> matrix{size, size};
         ElemT elem = 0;
@@ -36,7 +34,7 @@ int main() {
     }
     catch(const std::bad_alloc& e) {
         std::cerr << "Not enough memory/n";
-    }  
+    }
     catch(const std::invalid_argument& e) {
         std::cerr << "Input error: " << e.what() << "\n";
     }  //catch: bad alloc, not square matrix
