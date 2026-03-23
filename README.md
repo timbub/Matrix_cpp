@@ -1,27 +1,7 @@
 ## Matrix 
 
-### Project tree
-
-```text
-matrix
-├── CMakeLists.txt
-├── main.cpp
-├── Matrix.hpp
-├── BufMatrix.hpp
-├── tests
-|   ├── run_tests.sh
-|   ├── input
-|   |  ├── test_1.in
-|   |  ├── test_2.in
-|   |  ├── ...
-|   ├── output
-|   |  ├── test_1.out
-|   |  ├── test_2.out
-|   |  ├── ...
-└── 
-```
 ### About project
-This project implements a program that calculates the determinant of a matrix using Gaussian elimination.
+This project implements сlass **Matrix** and **Matrix** chain .... 
 
 ### Run
 #### Clone repository
