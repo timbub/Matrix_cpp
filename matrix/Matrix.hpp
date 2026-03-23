@@ -46,6 +46,23 @@ namespace matrix {
 
         ~Matrix() = default;
 
+        Matrix operator*(const Matrix& other) const {
+            if (cols_ != other.get_rows()) {
+                throw std::invalid_argument("Matrix dimensions mismatch");
+            }
+
+            Matrix result(rows_, other.get_cols());
+            for (int i = 0; i < rows_; ++i) {
+                for (int k = 0; k < cols_; ++k) {
+                    double r = this[i][k];
+                    for (int j = 0; j < other.get_cols(); ++j) {
+                        result[i][j] += r * other[k][j];
+                    }
+                }
+            }
+            return result;
+        }
+
         double determinate() {
             if (rows_ != cols_) throw std::invalid_argument("Matrix is not square");
             double det = 1.0;
