@@ -11,6 +11,8 @@ namespace matrix {
         std::vector<std::vector<size_t>> splits_;
     public:
         size_t get_dim(size_t i) const {return dims_.at(i);}
+        size_t get_count(size_t i) const {return matrices_.size();}
+
         template <typename Arg>
         void add_matrix(Arg&& arg) {
             size_t r = arg.get_rows();
@@ -67,6 +69,15 @@ namespace matrix {
             Matrix<ElemT> left  = multiply_optimal(i, k);
             Matrix<ElemT> right = multiply_optimal(k+1, j);
             return left*right;
+        }
+
+        Matrix<ElemT> multiply_naively(size_t i, size_t j) {
+            Matrix<ElemT> result = matrices_[0];
+            size_t count = get_count();
+            for(int i = 1; i < count; ++i) {
+                result *= matrices[i];
+            }
+            return result;
         }
     };
 }

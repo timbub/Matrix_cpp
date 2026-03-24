@@ -23,6 +23,7 @@ int main() {
             chain.add_matrix(matrix::Matrix<double>{dims[i], dims[i+1]});
         }
         chain.analysis_optimal();
+        //todo add check if not analysis after add matrix yet
         chain.print_order_(0,count_m - 1);
         std::cout << '\n';
     } catch(const std::out_of_range& e) {
