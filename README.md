@@ -59,3 +59,18 @@ To find the optimal multiplication order, provide the number of dimension values
 ```text
 1 0 2
 ```
+##Bencmark (Optimal vs Naively multiply)
+```bash
+./build/chain/tests/benchmark/bench
+```
+**Input:**
+```text
+ 4
+500 50 1000 100
+//matrices elementes...
+```
+**Output:**
+```text
+OPTIMAL: 154633u
+NAIVELY: 1519496u
+```
