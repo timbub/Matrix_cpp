@@ -6,6 +6,10 @@ int main() {
         if (!(std::cin >> count_dims)) {
             std::cerr << "Error of input count\n";
         }
+        if (!(std::cin >> count_dims)) {
+            if (std::cin.eof()) throw std::runtime_error("Unexpected end of input\n");
+            throw std::invalid_argument("Error of input count\n");
+        }
         using ElemT = double;
         matrix::Matrix_chain<ElemT> chain;
         std::vector<size_t> dims;
@@ -26,6 +30,8 @@ int main() {
         //todo add check if not analysis after add matrix yet
         chain.print_order_(0,count_m - 1);
         std::cout << '\n';
+    } catch(const std::runtime_error& e) {
+        std::cout << "Runtime error: " << e.what() << "\n";
     } catch(const std::out_of_range& e) {
         std::cerr << e.what() << "\n";
     } catch(const std::invalid_argument& e) {
