@@ -47,13 +47,13 @@ int main() {
     chain.multiply_optimal(0, chain.get_count() - 1);
     auto end = Clock::now();
     total_time = std::chrono::duration_cast<Us>(end - start).count();
-    std::cout << "OPTIMAL: " << total_time << "\n";
+    std::cout << "OPTIMAL: " << total_time << "u" << "\n";
 
     start = Clock::now();
     chain.multiply_naively(0, chain.get_count() - 1);
     end = Clock::now();
     total_time = std::chrono::duration_cast<Us>(end - start).count();
-    std::cout << "NAIVELY: " << total_time << "\n";
+    std::cout << "NAIVELY: " << total_time << "u" << "\n";
 
 }
 
