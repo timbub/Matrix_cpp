@@ -28,7 +28,7 @@ cmake -DCMAKE_BUILD_TYPE=Release -S . -B build
 cmake --build build
 ```
 
-#### Run
+### Run
 #### 1. Matrix Determinant
 To calculate the determinant, provide the size of the square matrix and its elements.
 ```bash
@@ -59,7 +59,7 @@ To find the optimal multiplication order, provide the number of dimension values
 ```text
 1 0 2
 ```
-## Bencmark (Optimal vs Naively multiply)
+#### 3.Bencmark (Optimal vs Naively multiply)
 ```bash
 ./build/chain/tests/benchmark/bench
 ```
