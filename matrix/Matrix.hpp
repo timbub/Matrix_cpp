@@ -54,7 +54,7 @@ namespace matrix {
             Matrix result(rows_, other.get_cols());
             for (int i = 0; i < rows_; ++i) {
                 for (int k = 0; k < cols_; ++k) {
-                    double r = this[i][k];
+                    double r = (*this)[i][k];
                     for (int j = 0; j < other.get_cols(); ++j) {
                         result[i][j] += r * other[k][j];
                     }
@@ -114,12 +114,11 @@ namespace matrix {
                     row_[i] -= other.row_[i] * factor;
                 }
             }
-
-
         };
 
         public:
         Row          operator[](size_t row)       { return Row(data_.get_row_ptr(row, cols_), cols_); }
-        const ElemT* operator[](size_t row) const { return data_ + row*cols_; }
+        const ElemT* operator[](size_t row) const { return data_.get_row_ptr(row, cols_);}
+
     };
 };

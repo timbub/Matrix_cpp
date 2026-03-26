@@ -24,13 +24,13 @@ int main() {
         size_t row_ = dims[i];
         size_t col_ = dims[i+1];
 
-        matrix::Matrix<double>{row_, col_}
+        matrix::Matrix<double> matrix{row_, col_};
         ElemT elem = 0;
         for (size_t row = 0; row < row_; row++)
         {
             for (size_t col = 0; col < col_; col++) {
                 if(!(std::cin >> elem)) {
-                    std::cerr << "Elem is not readed\n"
+                    std::cerr << "Elem is not readed\n";
                 }
                 matrix[row][col] = elem;
             }
@@ -46,13 +46,13 @@ int main() {
     auto start = Clock::now();
     chain.multiply_optimal(0, chain.get_count() - 1);
     auto end = Clock::now();
-    long long total_time = std::chrono::duration_cast<Us>(end - start).count();
+    total_time = std::chrono::duration_cast<Us>(end - start).count();
     std::cout << "OPTIMAL: " << total_time << "\n";
 
-    auto start = Clock::now();
+    start = Clock::now();
     chain.multiply_naively(0, chain.get_count() - 1);
-    auto end = Clock::now();
-    long long total_time = std::chrono::duration_cast<Us>(end - start).count();
+    end = Clock::now();
+    total_time = std::chrono::duration_cast<Us>(end - start).count();
     std::cout << "NAIVELY: " << total_time << "\n";
 
 }

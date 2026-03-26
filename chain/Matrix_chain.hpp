@@ -11,7 +11,7 @@ namespace matrix {
         std::vector<std::vector<size_t>> splits_;
     public:
         size_t get_dim(size_t i) const {return dims_.at(i);}
-        size_t get_count(size_t i) const {return matrices_.size();}
+        size_t get_count() const {return matrices_.size();}
 
         template <typename Arg>
         void add_matrix(Arg&& arg) {
@@ -75,7 +75,7 @@ namespace matrix {
             Matrix<ElemT> result = matrices_[0];
             size_t count = get_count();
             for(int i = 1; i < count; ++i) {
-                result *= matrices[i];
+                result = result * matrices_[i];
             }
             return result;
         }

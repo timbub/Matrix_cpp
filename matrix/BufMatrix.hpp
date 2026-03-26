@@ -34,11 +34,14 @@ namespace matrix {
         ElemT* get_row_ptr(size_t row, size_t cols) {
             return buf_ + row*cols;
         }
-
-    private:
+        const ElemT* get_row_ptr(size_t row, size_t cols) const { 
+            return buf_ + row * cols;
+        }
         void swap(BufMatrix& other) {
             std::swap(other.buf_, buf_);
             std::swap(other.len_, len_);
         }
     };
 }
+
+
