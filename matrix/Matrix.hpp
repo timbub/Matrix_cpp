@@ -6,7 +6,7 @@
 
 namespace compare_double {
     static constexpr double EPS = 1e-7;
-    bool is_zero(double n) {
+    inline bool is_zero(double n) {
         return std::abs(n) < EPS;
     }
 };
@@ -23,6 +23,9 @@ namespace matrix {
         size_t get_cols() const {return cols_;}
 
         Matrix(size_t rows, size_t cols) : data_(rows * cols), cols_(cols), rows_(rows) {}
+        //for Tensor
+        Matrix(size_t rows, size_t cols, ElemT* buf) : rows_(rows), cols_(cols), data_(rows*cols, buf) {}
+
         Matrix(const Matrix& other) : data_(other.rows_ * other.cols_), cols_(other.cols_), rows_(other.rows_) {
             for (size_t i = 0; i < rows_*cols_; i++) {
                 data_[i] = other.data_[i];
